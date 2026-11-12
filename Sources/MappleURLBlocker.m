@@ -69,7 +69,7 @@ static void MUBSwizzleInstanceMethod(Class cls, SEL originalSelector, SEL replac
         return;
     }
 
-    // class_addMethod handles methods inherited from a superclass safely.
+    // class_addMethod handles methods inherited from a superclass safely... I think
     BOOL added = class_addMethod(cls,
                                  originalSelector,
                                  method_getImplementation(replacement),
