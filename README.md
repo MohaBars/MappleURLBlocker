@@ -1,6 +1,6 @@
 # MappleURLBlocker
 
-A small Objective-C runtime-hook dylib intended to be injected **only into Mapple**
+A small Objective-C runtime-hook dylib intended to be injected into Mapple
 through LiveContainer's per-app tweak configuration.
 
 ## What it does
@@ -38,9 +38,7 @@ No local Xcode or Theos installation is required.
 4. Assign that folder to Mapple only, then fully terminate and relaunch Mapple.
 5. Test a normal in-app page and then reproduce the ad redirect.
 
-If LiveContainer refuses the dylib because of signing or architecture, do not
-try to bypass device security. Share the exact error and we can adjust the
-build/signing workflow to the supported LiveContainer import path.
+If LiveContainer refuses the dylib because of signing or architecture, click the sign button in LiveContainer.
 
 ## Important limitations
 
@@ -53,13 +51,3 @@ build/signing workflow to the supported LiveContainer import path.
 - It is injected only into Mapple, so it should not affect other apps.
 - This is a first-pass diagnostic build, not a guarantee that Mapple's
   particular redirect path uses these APIs.
-
-## Debugging
-
-Look for log messages beginning with:
-
-`[MappleURLBlocker]`
-
-If Safari still opens and no such message appears, the redirect is using a
-different route and we should add a targeted WebKit / React Native interception.
-If the log appears but Safari still opens, share the log and the exact behaviour.
