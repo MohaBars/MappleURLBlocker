@@ -1,0 +1,33 @@
+name: Build MappleURLBlocker
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Show Apple toolchain
+        run: |
+          xcodebuild -version
+          xcrun --sdk iphoneos --show-sdk-version
+
+      - name: Build arm64 iOS dylib
+        run: make
+
+      - name: Ad-hoc sign dylib
+        run: |
+          codesign --force --sign - --timestamp=none MappleURLBlocker.dylib
+          codesign --verify --verbose=2 MappleURLBlocker.dylib
+
+      - name: Upload dylib
+        uses: actions/upload-artifact@v4
+        with:
+          name: MappleURLBlocker-ios-arm64
+          path: MappleURLBlocker.dylib
+          if-no-files-found: error
