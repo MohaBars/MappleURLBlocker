@@ -1,4 +1,4 @@
-# Build with Apple's iPhoneOS SDK; no Theos required.
+# Build with Apple's iPhoneOS SDK, no Theos required.
 SDK := $(shell xcrun --sdk iphoneos --show-sdk-path)
 CLANG := xcrun --sdk iphoneos clang
 
